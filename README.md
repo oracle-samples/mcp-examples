@@ -6,8 +6,9 @@ Prototypes and proofs-of-concept
 
 | Project | Description |
 |---------|-------------|
-| [server](./server) | Example of MCP authentication using OCI IDCS and Oauth |
 | [agent](./agent) | An example agent developed using LangGraph that drives the OCI CLI |
+| [policy](./policy) | Demonstration of out-of-band policy enforcement for MCP servers/tools |
+| [server](./server) | Example of MCP authentication using OCI IDCS and OAuth |
 
 ## Contributing
 
