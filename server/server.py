@@ -195,6 +195,8 @@ def run_oci_command(
     config = generate_config(upst, PRIVATE_KEY, "us-sanjose-1")
 
     # write security token to a file
+    # using temporary files until
+    # https://github.com/oracle/oci-cli/pull/993
     with tempfile.NamedTemporaryFile(mode="wb") as temp_file:
         with tempfile.NamedTemporaryFile(mode="wb") as key_temp_file:
             temp_file.write(upst.encode("utf-8"))
@@ -214,6 +216,7 @@ def run_oci_command(
                     "OCI_CLI_FINGERPRINT": config["fingerprint"],
                     "OCI_CLI_AUTH": "security_token",
                     # this won't work without an update to oci-cli
+                    # see: https://github.com/oracle/oci-cli/pull/993
                     # "OCI_CLI_KEY_CONTENT": config["key_content"],
                     "OCI_CLI_KEY_FILE": key_temp_file.name,
                     "OCI_CLI_SECURITY_TOKEN_FILE": temp_file.name,
