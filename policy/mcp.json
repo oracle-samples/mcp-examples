@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "oracle-oci-api-mcp-server": {
+      "command": "uvx",
+      "args": [
+        "oracle.oci-api-mcp-server"
+      ],
+      "transport": "stdio"
+    }
+  }
+}
