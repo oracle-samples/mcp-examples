@@ -2,7 +2,11 @@
 
 ## Getting started
 
-### Create IDCS domain
+### Create IAM Domain 
+
+### IAM Domain Configuration
+
+Follow Steps from [IAM Domain Configuration](./IAMConfig.md) document.
 
 ### Prepare server
 

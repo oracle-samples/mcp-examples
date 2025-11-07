@@ -29,8 +29,8 @@ async def main():
         print(f"Prompts: {prompts}")
 
         # call list regions tool
-        result = await client.call_tool("list_regions", {})
-        result = await client.call_tool("get_os_namespace", {})
+        result = await client.call_tool("list_regions", {"region": "us-ashburn-1"})
+        result = await client.call_tool("get_os_namespace", {"region": "us-ashburn-1"})
         print(result)
 
 if __name__ == "__main__":
