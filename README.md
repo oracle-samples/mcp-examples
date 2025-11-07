@@ -10,6 +10,11 @@ Prototypes and proofs-of-concept
 | [policy](./policy) | Demonstration of out-of-band policy enforcement for MCP servers/tools |
 | [server](./server) | Example of MCP authentication using OCI IDCS and OAuth |
 
+## Getting started
+
+Refer to the README in each project subdirectory for specific instructions on how to get started
+with that project.
+
 ## Contributing
 
 This project welcomes contributions from the community. Before submitting a pull 
