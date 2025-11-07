@@ -8,11 +8,11 @@
 4. Open Settings tab. 
 5. Click on "Edit Domain Settings" button.
 
-[Edit IAM Domain Settings](./ocieditdomainsettingsbutton.png)
+![Edit IAM Domain Settings](./ocieditdomainsettingsbutton.png)
 
 6. Enable "Configure client access" checkbox as show in the screenshot.
 
-[IAM Domain Settings](./ocieditdomainsettings.png)
+![IAM Domain Settings](./ocieditdomainsettings.png)
 
 ### Create OAuth client for MCP server authentication
 
@@ -25,7 +25,7 @@
 7. Select Launch workflow.
 8. In the Add application details page, Enter name and description as shown below.
 
-[Add Confidential Integrated Application](./ociaddapplication.png)
+![Add Confidential Integrated Application](./ociaddapplication.png)
 
 9. Once the Integrated Application is created, Click on "OAuth configuration" tab.
 10. Click on "Edit OAuth configuration" button.
@@ -33,7 +33,7 @@
 12. Select "Authorization code" grant type. If you are planning to use the same OAuth client application for token exchange, select "Client credentials" grant type as well. In the sample, we will use the same client.
 13. For Authorization grant type, select redirect URL. This is, in most cases, will be MCP server URL followed by "/oauth/callback".
 
-[OAuth Configuration for an Integrated Application](./ocioauthconfiguration.png)
+![OAuth Configuration for an Integrated Application](./ocioauthconfiguration.png)
 
 14. Click on "Submit" button to update OAuth configuration for the client application. 
 **Note: You don't need to do any special configuration to support PKCE for the OAuth client.**
