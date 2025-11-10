@@ -1,0 +1,9 @@
+[project]
+name = "policy"
+version = "0.1.0"
+description = "Demonstration of out-of-band policy enforcement for MCP servers/tools"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "opa-python-client>=2.0.3",
+]

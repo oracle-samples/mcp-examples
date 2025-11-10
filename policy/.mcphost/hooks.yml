@@ -1,0 +1,6 @@
+hooks:
+  PreToolUse:
+    - matcher: "oci_*"
+      hooks:
+        - type: command
+          command: "uv run ./hooks/opa.py"
