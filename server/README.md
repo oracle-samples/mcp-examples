@@ -2,7 +2,11 @@
 
 ## Getting started
 
-### Create IDCS domain
+### Create IAM Domain 
+
+### IAM Domain Configuration
+
+Follow Steps from [IAM Domain Configuration](./IAMConfig.md) document.
 
 ### Prepare server
 
@@ -12,7 +16,7 @@
 export IDCS_CLIENT_ID=<value>
 export IDCS_CLIENT_SECRET=<value>
 # this isn't a URL 👇
-export IDCS_DOMAIN="hostname:port"
+export IDCS_DOMAIN="hostname:port from IDCS Domain URL"
 ```
 2. Start the server
 ```bash
