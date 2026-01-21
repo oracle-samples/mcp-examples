@@ -47,7 +47,7 @@ sequenceDiagram
     participant IDCS
     end
 
-    box rgb(140,140,140) OCI
+    box hsl(60, 80%, 95%) OCI
     participant OCI APIs
     end
 
