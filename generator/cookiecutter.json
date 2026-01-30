@@ -1,7 +1,5 @@
 {
-  "_copy_without_render": [
-    ".gitignore"
-  ],
+  "_copy_without_render": [".gitignore", ".containerignore"],
   "project_domain": "This is the domain of your service. It will be used to generate folders in the structure of 'oracle.oci-{project_domain}-mcp-server'",
   "description": "An OCI Model Context Protocol server for {{ cookiecutter.project_domain }}",
   "instructions": "Instructions for using this {{ cookiecutter.project_domain }} MCP server. This can be used by clients to improve the LLM's understanding of available tools, resources, etc. It can be thought of like a 'hint' to the model. For example, this information MAY be added to the system prompt. Important to be clear, direct, and detailed."
