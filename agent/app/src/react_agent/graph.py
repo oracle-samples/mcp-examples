@@ -10,14 +10,11 @@ from langchain_core.messages import AIMessage
 from langgraph.graph import StateGraph
 from langgraph.prebuilt import ToolNode
 from langgraph.runtime import Runtime
-from langchain_mcp_adapters.client import MultiServerMCPClient
 from react_agent.context import Context
 from react_agent.state import InputState, State
 from react_agent.tools import TOOLS
-from react_agent.utils import load_chat_model
-from langgraph.prebuilt import create_react_agent
-from langchain.chat_models import init_chat_model
-from langchain_mcp_adapters.client import MultiServerMCPClient
+from react_agent.utils import load_chat_model, validate_model_capabilities
+ 
 
 
 # Define the function that calls the model
@@ -37,14 +34,20 @@ async def call_model(
     Returns:
         dict: A dictionary containing the model's response message.
     """
-    # Initialize the model with tool binding. Change the model or add more tools here.
+    # Initialize the model. Some providers (like OCI GenAI via OCI SDK) may not
+    # support tool calling; allow disabling tool binding via context.
+    validate_model_capabilities(
+        runtime.context.model, enable_tools=runtime.context.enable_tools
+    )
     model = load_chat_model(
         runtime.context.model,
         base_url=runtime.context.base_url,
         model_args=runtime.context.model_args,
-    ).bind_tools(TOOLS)
+    )
+    if runtime.context.enable_tools:
+        model = model.bind_tools(TOOLS)
 
-    # model = load_chat_model("ollama/gpt-oss").bind_tools(TOOLS)
+    # model = load_chat_model("ollama:gpt-oss").bind_tools(TOOLS)
     # model = load_chat_model(runtime.context.model).bind_tools(tools)
 
     # Format the system prompt. Customize this to change the agent's behavior.

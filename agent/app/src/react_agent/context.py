@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import os
 from dataclasses import dataclass, field, fields
-from typing import Annotated, Dict
+from typing import Annotated, Any, Dict
 
 from . import prompts
 
@@ -22,18 +22,26 @@ class Context:
     )
 
     model: Annotated[str, {"__template_metadata__": {"kind": "llm"}}] = field(
-        default="anthropic/claude-3-5-sonnet-20240620",
+        default="anthropic:claude-3-5-sonnet-20240620",
         metadata={
             "description": "The name of the language model to use for the agent's main interactions. "
-            "Should be in the form: provider/model-name."
+            "Should be in the form: provider:model-name."
         },
     )
 
-    model_args: Dict[str, str] = field(default_factory=dict)
+    model_args: Dict[str, Any] = field(default_factory=dict)
 
     base_url: str = field(
         default="http://localhost:11434",
         metadata={"description": "URL to a modelserver, like Ollama"},
+    )
+
+    enable_tools: bool = field(
+        default=True,
+        metadata={
+            "description": "Whether the agent should enable tool calling. "
+            "Some model providers (e.g. OCI GenAI via the OCI SDK) may not support tool calling."
+        },
     )
 
     max_search_results: int = field(

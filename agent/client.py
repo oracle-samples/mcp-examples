@@ -17,6 +17,19 @@ async def main():
                 }],
             },
             context={
+                # Example local model:
+                # "model": "ollama:gpt-oss",
+
+                # Example OCI GenAI hosted model (requires model_args.compartment_id + region):
+                # "model": "oci_genai:ocid1.generativeaimodel.oc1..exampleuniqueID",
+                # "enable_tools": false,
+                # "model_args": {
+                #     "compartment_id": "ocid1.compartment.oc1..exampleuniqueID",
+                #     "region": "us-chicago-1",
+                #     "profile": "DEFAULT",
+                #     "auth_type": "api_key",
+                # },
+
                 "model": "ollama:gpt-oss",
                 # uncomment to enable reasoning
                 #"model_args": {"reasoning": "high"},

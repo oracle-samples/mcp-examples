@@ -64,6 +64,54 @@ curl -s --request POST \
     --header 'Content-Type: application/json' \
     --data @payload.json
 ```
+
+## Using OCI GenAI hosted models
+
+This agent can also use models hosted by the **OCI Generative AI** service.
+
+### Prerequisites
+
+- OCI CLI configured (or instance/resource principal auth available)
+- Access to OCI Generative AI service + a model you can call
+- Set your compartment OCID and region
+
+### Example request payload
+
+Provide the model as `oci_genai:<model_ocid>` and pass required OCI parameters in `model_args`.
+Tool-calling is disabled in this mode (the agent will still run, but won’t attempt tool calls).
+
+```json
+{
+  "assistant_id": "agent",
+  "input": {
+    "messages": [
+      {
+        "role": "human",
+        "content": "Summarize what LangGraph is in 2 sentences."
+      }
+    ]
+  },
+  "context": {
+    "model": "oci_genai:ocid1.generativeaimodel.oc1..exampleuniqueID",
+    "enable_tools": false,
+    "model_args": {
+      "compartment_id": "ocid1.compartment.oc1..exampleuniqueID",
+      "region": "us-chicago-1",
+      "profile": "DEFAULT",
+      "auth_type": "api_key",
+      "temperature": 0.2,
+      "max_tokens": 512
+    }
+  },
+  "stream_mode": "messages-tuple"
+}
+```
+
+`auth_type` can be one of:
+- `api_key` (default; uses your OCI config file)
+- `instance_principal`
+- `resource_principal`
+
 ## License
 Copyright (c) 2025 Oracle and/or its affiliates.
  
