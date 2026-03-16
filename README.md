@@ -11,6 +11,7 @@ Prototypes and proofs-of-concept
 | [server](./server) | Example of MCP authentication using OCI IDCS and OAuth |
 | [infrastructure](./infrastructure) | Example templates that instantiate an OCI GPU compute instance and install the Nvidia stack |
 | [generator](./generator) | A utility to quickly generate an OCI-specific MCP server using [cookiecutter](https://cookiecutter.readthedocs.io/en/stable/) |
+| [mcp-gateway](./mcp-gateway) | A small MCP aggregation service that exposes multiple upstream MCP servers through a single endpoint |
 
 ## Getting started
 
