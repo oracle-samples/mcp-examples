@@ -6,7 +6,7 @@ description = "{{cookiecutter.description}}"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "fastmcp==2.12.2",
+    "fastmcp==2.14.2",
     "oci==2.160.0",
     "pydantic==2.12.3",
 ]
