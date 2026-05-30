@@ -1,0 +1,9 @@
+.git
+.gitignore
+.npmrc
+.next
+config/app-config.toml
+node_modules
+npm-debug.log
+README.md
+test

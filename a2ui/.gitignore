@@ -1,0 +1,8 @@
+.DS_Store
+.env
+.env.local
+.env.*.local
+.next
+config/app-config.toml
+node_modules
+npm-debug.log*

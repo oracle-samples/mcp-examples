@@ -1,0 +1,51 @@
+services:
+  a2ui:
+    build:
+      context: .
+      dockerfile: Containerfile.app
+    image: a2ui-app:compose
+    container_name: a2ui
+    depends_on:
+      oci-mcp:
+        condition: service_healthy
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./config/app-config.toml:/app/config/app-config.toml:ro
+    environment:
+      A2UI_MODE: ${A2UI_MODE:-}
+      A2UI_OPENAI_TIMEOUT_MS: ${A2UI_OPENAI_TIMEOUT_MS:-120000}
+    secrets:
+      - openai_api_key
+    restart: unless-stopped
+
+  oci-mcp:
+    build:
+      context: .
+      dockerfile: Containerfile.mcp
+    image: a2ui-oci-mcp:compose
+    container_name: a2ui-oci-mcp
+    environment:
+      ORACLE_MCP_HOST: 0.0.0.0
+      ORACLE_MCP_PORT: "8888"
+      OCI_CONFIG_PROFILE: ${OCI_CONFIG_PROFILE:-DEFAULT}
+    healthcheck:
+      test:
+        - CMD
+        - python3
+        - -c
+        - "import socket; s = socket.create_connection(('127.0.0.1', 8888), 2); s.close()"
+      interval: 5s
+      timeout: 3s
+      retries: 12
+      start_period: 5s
+    expose:
+      - "8888"
+    volumes:
+      - ${HOME}/.oci:/home/nextjs/.oci:ro
+      - ${HOME}/.oci:${HOME}/.oci:ro
+    restart: unless-stopped
+
+secrets:
+  openai_api_key:
+    external: true

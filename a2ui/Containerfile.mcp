@@ -1,0 +1,44 @@
+FROM ghcr.io/astral-sh/uv:0.6.14 AS uv
+
+FROM container-registry.oracle.com/os/oraclelinux:10-slim AS runner
+
+ARG OCI_MCP_SERVER_VERSION=1.1.2
+
+WORKDIR /app
+
+ENV HOME=/home/nextjs \
+    PATH=/usr/local/bin:$PATH \
+    UV_CACHE_DIR=/tmp/uv-cache \
+    UV_TOOL_BIN_DIR=/usr/local/bin \
+    UV_TOOL_DIR=/opt/uv/tools \
+    ORACLE_MCP_HOST=0.0.0.0 \
+    ORACLE_MCP_PORT=8888
+
+RUN if command -v microdnf >/dev/null 2>&1; then \
+      PKG_MGR=microdnf; \
+    else \
+      PKG_MGR=dnf; \
+    fi && \
+    "$PKG_MGR" install -y \
+      ca-certificates \
+      libstdc++ \
+      python3 \
+      shadow-utils && \
+    "$PKG_MGR" clean all && \
+    groupadd --system --gid 1001 nodejs && \
+    useradd --system --create-home --home-dir /home/nextjs --uid 1001 --gid 1001 nextjs && \
+    mkdir -p /tmp/uv-cache /opt/uv/tools /home/nextjs/.oci && \
+    chown -R nextjs:nodejs /tmp/uv-cache /opt/uv /home/nextjs
+
+COPY --from=uv /uv /usr/local/bin/uv
+
+RUN uv tool install \
+      --python python3 \
+      --from "oracle-oci-cloud-mcp-server==${OCI_MCP_SERVER_VERSION}" \
+      oracle.oci-cloud-mcp-server
+
+USER nextjs
+
+EXPOSE 8888
+
+CMD ["oracle.oci-cloud-mcp-server"]
